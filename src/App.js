@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import{useState} from 'react'
+const App = () =>{
+  const[temp, setTemp] = useState(13)
+  const [tempColor, setTempColor] = useState("cold")
 
-function App() {
+  const increase = ()=>{ 
+    if(temp === 30) return   
+    const newTemp = temp+1;
+    setTemp(temp+1);
+
+    if(newTemp > 16){
+      setTempColor("hot")
+    }
+  }
+  
+  const decrease = ()=>{
+    if (temp === 10) return
+    const newTemp = temp-1;
+    setTemp(temp-1)
+
+    if(newTemp <= 16){
+      setTempColor("cold")
+    }
+  }  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <div className="temperature-display-container">
+        <div className={`temperature-display ${tempColor}`}>{temp}°C</div>
+      </div>
+      <div className="button-container">        
+        <button onMouseDown = {()=>decrease()}>-</button>
+        <button onMouseDown = {()=>increase()}>+</button>
+      </div>      
     </div>
-  );
+  )
 }
 
 export default App;
